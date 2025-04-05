@@ -2,9 +2,6 @@ import { validationResult } from "express-validator";
 import { clientError, errorMessage } from "../helper/ErrorMessage";
 import { response ,sendEmailOtp,sendEmail} from "../helper/commonResponseHandler";
 import { Users,UsersDocument } from "../model/users.model";
-import { Panel,PanelDocument } from "../model/panel.model";
-import { Company,CompanyDocument } from "../model/company.model";
-import { Doctor,DoctorDocument } from "../model/doctor.model";
 import *  as TokenManager from "../utils/tokenManager";
 
 var activity = "Users";
@@ -22,10 +19,7 @@ export let saveUsers = async (req, res, next) => {
     if (errors.isEmpty()) {
         try {
             const usersData = await Users.findOne({ $and: [{ isDeleted: false }, { email: req.body.email }] });
-            const panelData = await Panel.findOne({ $and: [{ isDeleted: false }, { email: req.body.email }] });
-            const companyData = await Company.findOne({ $and: [{ isDeleted: false }, { email: req.body.email }] });
-            const doctorData = await Doctor.findOne({ $and: [{ isDeleted: false }, { email: req.body.email }] });
-            if (!usersData && !panelData && !companyData && !doctorData) {
+            if (!usersData ) {
                 const usersDetails: UsersDocument = req.body;
                 let otp = Math.floor(1000 + Math.random() * 9000);
                 usersDetails.otp=otp
@@ -164,19 +158,7 @@ export let updateUser = async (req, res, next) => {
             const updateData = await Users.findOneAndUpdate({ _id: req.body._id }, {
                 $set: {
                     email: userDetail.email,
-                    name: userDetail.name,
-                    fullName: userDetail.fullName,
                     mobileNumber: userDetail.mobileNumber,
-                    profileImage: userDetail.profileImage,
-                    gender: userDetail.gender,
-                    address: userDetail.address,
-                    city: userDetail.city,
-                    state: userDetail.state,
-                    pincode: userDetail.pincode,
-                    landmark: userDetail.landmark,
-                    alternativeMobileNumber: userDetail.alternativeMobileNumber,
-                    locality: userDetail.locality,
-                    useMyCurretAddress: userDetail.useMyCurretAddress,  
                     modifiedOn: userDetail.modifiedOn,
                     modifiedBy: userDetail.modifiedBy
                 }
@@ -214,17 +196,8 @@ export let getFilteredUser = async (req, res, next) => {
     if (req.body.email) {
         andList.push({ email: req.body.email })
     }
-    if (req.body.name) {
-        andList.push({ name: req.body.name })
-    }
     if (req.body.mobileNumber) {
         andList.push({ mobileNumber: req.body.mobileNumber })
-    }
-    if (req.body.gender) {
-        andList.push({ gender: req.body.gender })
-    }
-    if(req.body.city){
-        andList.push({city:req.body.city})
     }
 
     findQuery =(andList.length > 0) ? { $and: andList } : {}

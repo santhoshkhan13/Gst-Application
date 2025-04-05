@@ -3,10 +3,7 @@ import { saveLog } from "../controller/logs.controller";
 import { LogsDocument, Logs } from "../model/logs.model";
 var nodemailer = require('nodemailer');
 import axios from 'axios';
-import { OrderDocument } from "src/model/order.model";
-import {Doctor} from "../model/doctor.model";
 import {Users} from "../model/users.model";
-import {Coupon} from "../model/coupon.model";
 
 
 /**
@@ -168,19 +165,19 @@ export function generate(length) {
  *  @param {Function} next
  *  @description This Function is used to generate invoice
  * */
-export async function generateInvoice(orderDetails:OrderDocument,invoiceNumber): Promise<string> {
-    let invoiceContent = 'Invoice\n\n';
-    invoiceContent += 'Products:\n';
+// export async function generateInvoice(orderDetails:OrderDocument,invoiceNumber): Promise<string> {
+//     let invoiceContent = 'Invoice\n\n';
+//     invoiceContent += 'Products:\n';
 
-    for (const product of orderDetails.products) {
-        invoiceContent += `- ${product.name} x ${product.quantity}: $${product.discountedPrice * product.quantity}\n`;
-    }
-    const total = orderDetails.products.reduce((acc, product) => acc + product.discountedPrice * product.quantity, 0);
+//     for (const product of orderDetails.products) {
+//         invoiceContent += `- ${product.name} x ${product.quantity}: $${product.discountedPrice * product.quantity}\n`;
+//     }
+//     const total = orderDetails.products.reduce((acc, product) => acc + product.discountedPrice * product.quantity, 0);
 
-    invoiceContent += `\nTotal: $${total}`;
-    const pdfFilePath = await generatePDFInvoice(invoiceContent);
-    return pdfFilePath;
-}
+//     invoiceContent += `\nTotal: $${total}`;
+//     const pdfFilePath = await generatePDFInvoice(invoiceContent);
+//     return pdfFilePath;
+// }
 
  async function generatePDFInvoice(content: string): Promise<string> {
     const pdfFilePath = 'path_to_generated_invoice.pdf'; // Replace with actual file path
@@ -376,13 +373,13 @@ export async function getUserEmailAddress(userId) {
  * @param {Function} next  
  * @description This Function is used to retrieve doctor email address based on doctorId
  */
-// Function to retrieve doctor email address based on doctorId
-export async function getDoctorEmailAddress(doctorId) {
-  // Your logic to retrieve doctor email address based on doctorId
-  // Example: Assuming you have a Doctor model with an email field
-  const doctor = await Doctor.findById(doctorId);
-  return doctor.email;
-}
+// // Function to retrieve doctor email address based on doctorId
+// export async function getDoctorEmailAddress(doctorId) {
+//   // Your logic to retrieve doctor email address based on doctorId
+//   // Example: Assuming you have a Doctor model with an email field
+//   const doctor = await Doctor.findById(doctorId);
+//   return doctor.email;
+// }
 
 /**
  * @author Santhosh Khan K
@@ -427,21 +424,21 @@ export async function sentEmail(to, subject, message) {
  * @description This Function is used to automatically generate coupon code.
  */
 // Function to generate a new coupon code and save it
-const generateAndSaveNewCoupon = async () => {
-  const couponCode = generateCouponCode();
-  const newCoupon = new Coupon({
-    code: couponCode,
-    validFrom: new Date(),
-    validTill: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // Valid for 1 day
-  });
-  await newCoupon.save();
-};
+// const generateAndSaveNewCoupon = async () => {
+//   const couponCode = generateCouponCode();
+//   const newCoupon = new Coupon({
+//     code: couponCode,
+//     validFrom: new Date(),
+//     validTill: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // Valid for 1 day
+//   });
+//   await newCoupon.save();
+// };
 
-// Function to schedule the generation of a new coupon after the given date
-export const scheduleNextCouponGeneration = (date) => {
-  const timeUntilNextCoupon = date.getTime() - Date.now();
-  setTimeout(generateAndSaveNewCoupon, timeUntilNextCoupon);
-};
+// // Function to schedule the generation of a new coupon after the given date
+// export const scheduleNextCouponGeneration = (date) => {
+//   const timeUntilNextCoupon = date.getTime() - Date.now();
+//   setTimeout(generateAndSaveNewCoupon, timeUntilNextCoupon);
+// };
 
 // Helper function to check if two dates are on the same day
 // export async function isSameDay(date1, date2) {

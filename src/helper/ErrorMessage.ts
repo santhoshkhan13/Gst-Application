@@ -1,4 +1,4 @@
-import { bookAppointment } from "src/controller/doctorAppoiment.controller";
+// import { bookAppointment } from "src/controller/doctorAppoiment.controller";
 
 export let ErrorMessage = {
     email: {

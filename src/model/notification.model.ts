@@ -23,11 +23,11 @@ const notificationSchema = new mongoose.Schema({
   title: { type: String },
   from: {
       user: { type: mongoose.Types.ObjectId, refPath: "from.modelType" },
-      modelType: { type: String, enum: ['Company', 'User', 'Doctor'], required: true }
+      modelType: { type: String, enum: [ 'User' ], required: true }
   },
   to: {
       user: { type: mongoose.Types.ObjectId, refPath: "to.modelType" },
-      modelType: { type: String, enum: ['Doctor', 'User', 'Company'], required: true }
+      modelType: { type: String, enum: [ 'User'], required: true }
   },
   isViewed: { type: Boolean, default: false },
   status: { type: Number, default: 1 },

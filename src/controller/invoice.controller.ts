@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import { response } from "../helper/commonResponseHandler";
 import { clientError, errorMessage } from "../helper/ErrorMessage";
-import { Order, OrderDocument } from "../model/order.model";
+import { Users,UsersDocument } from "../model/users.model";
 
 
 var activity = 'Invoice';
@@ -16,7 +16,7 @@ var activity = 'Invoice';
  */
 export let getInvoiceNumber = async (req, res, next) => {
     try {
-        const data = await Order.find({ isDeleted: false }).populate('products.panelId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,}).populate('products.companyId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,});
+        const data = await Users.find({ isDeleted: false }).populate('products.panelId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,}).populate('products.companyId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,});
         response(req, res, activity, 'Level-1', 'GetInvoice-Number', true, 200, data, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'GetInvoice-Number', false, 500, {}, errorMessage.internalServer, err.message);
@@ -33,7 +33,7 @@ export let getInvoiceNumber = async (req, res, next) => {
  */
 export let getAllInvoice = async (req, res, next) => {
     try {
-        const data = await Order.find({ isDeleted: false }).populate('products.panelId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,}).populate('products.companyId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,});
+        const data = await Users.find({ isDeleted: false }).populate('products.panelId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,}).populate('products.companyId',{name:1,companyName:1,email:1,city:1,state:1,mobileNumber:1,companyAddress:1,});
         response(req, res, activity, 'Level-1', 'GetAll-Invoice', true, 200, data, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'GetAll-Invoice', false, 500, {}, errorMessage.internalServer, err.message);
@@ -51,10 +51,10 @@ export let getAllInvoice = async (req, res, next) => {
 
 export let generateInvoiceCopy = async (req, res, next) => {
     try {
-        const orderData: OrderDocument = req.body;
+        const UsersData: UsersDocument = req.body;
         const invoice = {
-            orderNumber: orderData.orderNumber,
-            totalAmount: orderData.totalAmount,
+            // UsersNumber: UsersData.usersNumber,
+            // totalAmount: UsersData.totalAmount,
         };
         response(req, res, activity, 'Level-1', 'Generate-Invoice', true, 200, invoice, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
@@ -75,12 +75,12 @@ export let updateInvoice = async (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
         try {
-            const invoiceDetails: OrderDocument = req.body;
-            const updateInvoice = new Order(invoiceDetails)
+            const invoiceDetails: UsersDocument = req.body;
+            const updateInvoice = new Users(invoiceDetails)
             let updateData = await updateInvoice.updateOne({
                 $set: {
-                    orderNumber: invoiceDetails.orderNumber,
-                    totalAmount: invoiceDetails.totalAmount,
+                    // UsersNumber: invoiceDetails.UsersNumber,
+                    // totalAmount: invoiceDetails.totalAmount,
                     modifiedOn: invoiceDetails.modifiedOn,
                     modifiedBy: invoiceDetails.modifiedBy
                 }
@@ -106,7 +106,7 @@ export let deleteInvoice = async (req, res, next) => {
     try {
         let { modifiedOn, modifiedBy } = req.body;
         let id = req.query._id;
-        const data = await Order.findByIdAndUpdate({ _id: id }, {
+        const data = await Users.findByIdAndUpdate({ _id: id }, {
             $set: {
                 isDeleted: true,
                 modifiedOn: modifiedOn,
@@ -132,7 +132,7 @@ export let deleteInvoice = async (req, res, next) => {
  */
 export let getSingleInvoice = async (req, res, next) => {
     try {
-        const data = await Order.findById({ _id: req.query._id })
+        const data = await Users.findById({ _id: req.query._id })
         response(req, res, activity, 'Level-1', 'Get-SingleInvoice', true, 200, data, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'Get-SingleInvoice', false, 500, {}, errorMessage.internalServer, err.message);
@@ -155,8 +155,8 @@ export let getFilterInvoice = async (req, res, next) => {
         var page = req.body.page ? req.body.page : 0;
         andList.push({ isDeleted: false })
         findQuery = (andList.length > 0) ? { $and: andList } : {}
-        const invoiceList = await Order.find(findQuery).sort({ createdOn: -1 }).limit(limit).skip(page).populate('client',{name:1}).populate('project',{title:1}).populate('resource',{projectTitle:1})
-        const invoiceCount = await Order.find(findQuery).count()
+        const invoiceList = await Users.find(findQuery).sort({ createdOn: -1 }).limit(limit).skip(page).populate('client',{name:1}).populate('project',{title:1}).populate('resource',{projectTitle:1})
+        const invoiceCount = await Users.find(findQuery).count()
         response(req, res, activity, 'Level-1', 'Get-FilterInvoice', true, 200, { invoiceList, invoiceCount }, clientError.success.fetchedSuccessfully);
     } catch (err: any) {
         response(req, res, activity, 'Level-3', 'Get-FilterInvoice', false, 500, {}, errorMessage.internalServer, err.message);
@@ -176,11 +176,11 @@ export let getFilterInvoice = async (req, res, next) => {
 
 export const generateInvoice = async (req,res,next) => {
   try {
-    const orderData: OrderDocument = req.body;
+    const UsersData: UsersDocument = req.body;
 
     const invoice = {
-      orderNumber: orderData.orderNumber,
-      totalAmount: orderData.totalAmount,
+    //   UsersNumber: UsersData.UsersNumber,
+    //   totalAmount: UsersData.totalAmount,
     };
 
     response(req, res, activity, 'Level-1', 'Generate-Invoice', true, 200, invoice, clientError.success.fetchedSuccessfully);
