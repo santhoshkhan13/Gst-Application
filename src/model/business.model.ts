@@ -45,4 +45,4 @@ const businessSchema = new mongoose.Schema({
 });
 
 
-export const Admin = mongoose.model("Admin", businessSchema);
+export const Business = mongoose.model("Business", businessSchema);
