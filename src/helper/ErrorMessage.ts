@@ -131,6 +131,7 @@ export let clientError = Object.freeze({
         couponUsedSuccessfully: 'Coupon used successfully',
         couponCreatedSuccessfully: 'Coupon created successfully',
         couponFetchedSuccessfully: 'Coupon fetched successfully',
+        reateSuccess: 'Create Business User'
 
     },
     account: {
