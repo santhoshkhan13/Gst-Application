@@ -7,6 +7,15 @@ import { Business,BusinessDocument} from "../model/business.model";
 
 var activity = 'Business';
 
+/**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
 export const updateBusiness = async (req, res,next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -34,6 +43,15 @@ export const updateBusiness = async (req, res,next) => {
   };
 
 
+  /**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
   export const createBusiness = async (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
@@ -49,6 +67,16 @@ export const updateBusiness = async (req, res,next) => {
     }
   };
   
+
+  /**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
 export let getAllUser = async (req, res, next) => {
     try{
         const user = await Business.find({ isDeleted: false });
@@ -62,7 +90,7 @@ export let getAllUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-02-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -82,7 +110,7 @@ export let getSingleUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-02-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -103,7 +131,7 @@ export let getProfileDetails = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   10-10-2023
+ * @date   02-02-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next

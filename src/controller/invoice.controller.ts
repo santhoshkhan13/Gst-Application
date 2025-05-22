@@ -8,7 +8,7 @@ var activity = 'Invoice';
 
 /**
  * @author Santhosh Khan K
- * @date 27-10-2023
+ * @date 05-05-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -25,7 +25,7 @@ export let getInvoiceNumber = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-10-2023
+ * @date 05-05-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -42,7 +42,7 @@ export let getAllInvoice = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-10-2023
+ * @date 05-05-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -65,7 +65,7 @@ export let generateInvoiceCopy = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-10-2023
+ * @date 05-05-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -96,7 +96,7 @@ export let updateInvoice = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-10-2023
+ * @date 05-05-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -124,7 +124,7 @@ export let deleteInvoice = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 20-11-2023
+ * @date 20-02-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -141,7 +141,7 @@ export let getSingleInvoice = async (req, res, next) => {
 
  /**
  * @author Santhosh Khan K
- * @date 20-11-2023
+ * @date 20-02-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next 
@@ -165,7 +165,7 @@ export let getFilterInvoice = async (req, res, next) => {
 
  /**
  * @author Santhosh Khan K
- * @date 20-11-2023
+ * @date 20-02-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next 

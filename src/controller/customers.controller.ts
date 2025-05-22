@@ -1,24 +1,33 @@
 import { validationResult } from "express-validator";
 import { response } from "../helper/commonResponseHandler";
 import { clientError, errorMessage } from "../helper/ErrorMessage";
-import { Customer,CustomerDocument} from "../model/customer.model";
+import { Customers,CustomersDocument} from "../model/customers.model";
 
 
 
 var activity = 'Customer';
 
+/**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
 export const updateCustomer = async (req, res,next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       try {
         const customerDetails = req.body;
-        const customer = await Customer.findById(customerDetails._id);
+        const customer = await Customers.findById(customerDetails._id);
   
         if (!customer) {
           return res.status(404).json({ message: "customer not found" });
         }
   
-        const updateData = await Customer.findByIdAndUpdate(customerDetails._id, {
+        const updateData = await Customers.findByIdAndUpdate(customerDetails._id, {
           ...customerDetails,
           modifiedOn: customerDetails.modifiedOn,
           modifiedBy: customerDetails.modifiedBy
@@ -33,13 +42,21 @@ export const updateCustomer = async (req, res,next) => {
     }
   };
 
-
+/**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
   export const createcustomer = async (req, res, next) => {
     const errors = validationResult(req);
     if (errors.isEmpty()) {
       try {
         const customerDetails = req.body;
-        const newcustomer = await Customer.create(customerDetails);
+        const newcustomer = await Customers.create(customerDetails);
         response(req, res, activity, 'Level-2', 'Create-customer', true, 201, newcustomer, clientError.success.addedSuccessfully);
       } catch (err: any) {
         response(req, res, activity, 'Level-3', 'Create-customer', false, 500, {}, errorMessage.internalServer, err.message);
@@ -49,9 +66,19 @@ export const updateCustomer = async (req, res,next) => {
     }
   };
   
+
+  /**
+ *  
+ * @author Santhosh Khan K
+ * @date   26-02-2025
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @description This Function is used to get Single user
+ */
 export let getAllUser = async (req, res, next) => {
     try{
-        const user = await Customer.find({ isDeleted: false });
+        const user = await Customers.find({ isDeleted: false });
         response(req, res, activity, 'Level-2', 'Get-All-user', true, 200, user, clientError.success.fetchedSuccessfully);
     }
     catch (err: any) {
@@ -62,7 +89,7 @@ export let getAllUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-05-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -71,7 +98,7 @@ export let getAllUser = async (req, res, next) => {
 
 export let getSingleUser = async (req, res, next) => {
     try{
-        const user = await Customer.findOne({ _id: req.query._id });
+        const user = await Customers.findOne({ _id: req.query._id });
         response(req, res, activity, 'Level-2', 'Get-Single-user', true, 200, user, clientError.success.fetchedSuccessfully);
     }
     catch (err: any) {
@@ -82,7 +109,7 @@ export let getSingleUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-02-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -91,7 +118,7 @@ export let getSingleUser = async (req, res, next) => {
 
 export let getProfileDetails = async (req, res, next) => {
     try{
-        const user = await Customer.findById({ _id: req.query._id });
+        const user = await Customers.findById({ _id: req.query._id });
         response(req, res, activity, 'Level-2', 'Get-ProfileDetails-User', true, 200, user, clientError.success.fetchedSuccessfully);
     }
     catch (err: any) {
@@ -103,7 +130,7 @@ export let getProfileDetails = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   10-10-2023
+ * @date   10-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -113,7 +140,7 @@ export let getProfileDetails = async (req, res, next) => {
 export let deleteUser = async (req, res, next) => {
     try{
         let {modifiedOn,modifiedBy} = req.body;
-        const user = await Customer.findOneAndUpdate({ _id: req.body._id }, {
+        const user = await Customers.findOneAndUpdate({ _id: req.body._id }, {
             $set: {
                 isDeleted: true,
                 modifiedOn: modifiedOn,

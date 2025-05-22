@@ -8,7 +8,7 @@ var activity = "Users";
 
 /**
  * @author Santhosh Khan K
- * @date   09-10-2023
+ * @date   09-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -55,7 +55,7 @@ export let saveUsers = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -75,7 +75,7 @@ export let getAllUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -95,7 +95,7 @@ export let getSingleUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   26-10-2023
+ * @date   26-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -116,7 +116,7 @@ export let getProfileDetails = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   10-10-2023
+ * @date   03-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -143,7 +143,7 @@ export let deleteUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   10-10-2023
+ * @date   03-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next
@@ -178,7 +178,7 @@ export let updateUser = async (req, res, next) => {
 /**
  *  
  * @author Santhosh Khan K
- * @date   08-11-2023
+ * @date   08-03-2025
  * @param {Object} req
  * @param {Object} res
  * @param {Function} next

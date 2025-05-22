@@ -10,7 +10,7 @@ var activity = "Login"
 
 /**
  * @author Santhosh Khan K 
- * @date 09-10-2023
+ * @date 09-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -55,7 +55,7 @@ export let login = async (req, res, next) => {
 };
 /**
  * @author Santhosh Khan K 
- * @date 09-10-2023
+ * @date 09-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -95,7 +95,7 @@ export let sendMailOtp = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 09-10-2023
+ * @date 09-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -141,7 +141,7 @@ export let verifyGmailOtp = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 09-10-2023
+ * @date 09-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  

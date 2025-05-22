@@ -7,7 +7,7 @@ var activity = "Notification"
 
 /**
  * @author Santhosh Khan K
- * @date 27-12-2023
+ * @date 27-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -24,7 +24,7 @@ export let getAllNotification = async (req, res, next) => {
 
 /**
 * @author Santhosh Khan K
- * @date 27-12-2023
+ * @date 27-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -46,7 +46,7 @@ export let saveNotification = async (data) => {
 
 /**
 * @author Santhosh Khan K
- * @date 27-12-2023
+ * @date 27-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -77,7 +77,7 @@ export let getFilterNotification = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-12-2023
+ * @date 27-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
@@ -106,7 +106,7 @@ export let updateNotificationView = async (req, res, next) => {
 
 /**
  * @author Santhosh Khan K
- * @date 27-12-2023
+ * @date 27-03-2025
  * @param {Object} req 
  * @param {Object} res 
  * @param {Function} next  
